@@ -7,6 +7,9 @@ trap 'rm -rf "$stage"' EXIT
 cp package.json package-lock.json host.json "$stage/"
 cp -R src "$stage/"
 npm ci --omit=dev --ignore-scripts --prefix "$stage"
+# O deploy roda com umask 077. Só os arquivos públicos de runtime no ZIP
+# precisam ser legíveis pelo usuário que executa as funções na Azure.
+chmod -R a+rX "$stage/host.json" "$stage/package.json" "$stage/package-lock.json" "$stage/src" "$stage/node_modules"
 destination="$PWD/.deploy/functionapp.zip"
 rm -f "$destination"
 (cd "$stage" && zip -qr "$destination" host.json package.json package-lock.json src node_modules)

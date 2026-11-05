@@ -21,7 +21,9 @@ def build():
                 data = json.dumps(package).encode()
             dest.writestr(item, data)
         for name in ('scripts/bootstrap-function.js', 'scripts/init-db.js', 'sql/schema.sql'):
-            dest.write(name, name)
+            info = zipfile.ZipInfo.from_file(name, name)
+            info.external_attr = 0o100644 << 16
+            dest.writestr(info, Path(name).read_bytes(), compress_type=zipfile.ZIP_DEFLATED)
 
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):

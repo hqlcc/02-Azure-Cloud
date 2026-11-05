@@ -83,6 +83,16 @@ az functionapp config appsettings set --name "$FUNCTION_APP" --resource-group "$
 
 ## scripts/publicar.sh
 
+A publicação tenta inicializar o banco diretamente pelo Cloud Shell. O instalador HTTP temporário é usado quando a conexão direta falha. A senha da aplicação fica somente em memória.
+
+```bash
+FILTRO_SENHA_SQL="[?name=='SQL_PASSWORD'].value | [0]"
+SQL_APP_PASSWORD="$(az functionapp config appsettings list -g "$RESOURCE_GROUP" -n "$FUNCTION_APP" --query "$FILTRO_SENHA_SQL" -o tsv --only-show-errors)"
+# Com as variáveis SQL do processo preparadas por scripts/publicar.sh:
+npm run db:init
+```
+
+
 ```bash
 npm ci --ignore-scripts --no-fund --no-audit
 ```

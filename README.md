@@ -70,16 +70,18 @@ A fila é o recurso do Azure Storage; a Queue Function é sua consumidora. A cha
 
 ## Concluir a implantação existente
 
-1. Extraia o ZIP. No GitHub, envie o conteúdo para a raiz de [hqlcc/av-icl-02-azure](https://github.com/hqlcc/av-icl-02-azure), com `README.md`, `package.json` e `host.json` no mesmo nível.
-2. Abra o [Azure Cloud Shell em Bash](https://shell.azure.com/bash) na assinatura Azure for Students usada na atividade. No menu de arquivos do Cloud Shell, envie o ZIP original para a sua pasta pessoal.
-3. Execute os comandos abaixo. A retomada usa o grupo existente `rg-avicl02-02a82191`. O script pede a senha do administrador SQL. Se você não a tiver, pressione Enter e digite `REDEFINIR` para autorizar a troca dessa senha no servidor dedicado da atividade.
+Os arquivos já estão na raiz de [hqlcc/02-Azure-Cloud](https://github.com/hqlcc/02-Azure-Cloud). Para concluir a publicação no grupo já criado:
+
+1. Abra o [Azure Cloud Shell em Bash](https://shell.azure.com/bash) na assinatura Azure for Students desta atividade.
+2. Cole esta linha no terminal. Ela baixa o projeto e inicia a publicação usando os recursos existentes.
 
 ```bash
-mkdir -p ~/av-icl-02-entrega
-unzip -o ~/av-icl-02-azure.zip -d ~/av-icl-02-entrega
-cd ~/av-icl-02-entrega
-bash scripts/retomar.sh
+git clone https://github.com/hqlcc/02-Azure-Cloud.git && cd 02-Azure-Cloud && bash scripts/retomar.sh
 ```
+
+Se já tiver clonado o projeto no Cloud Shell, entre na pasta com `cd ~/02-Azure-Cloud` e execute `bash scripts/retomar.sh`.
+
+3. O script pede a senha do administrador SQL do servidor dedicado desta atividade. Se precisar gerar uma nova, pressione Enter no campo de senha e leia a confirmação antes de digitar `REDEFINIR`.
 
 4. Aguarde a mensagem `PASS: endpoint válido e novos registros no banco.`. Baixe os arquivos atualizados da pasta `docs` do Cloud Shell e inclua `COMANDOS_EXECUTADOS.md`, `ENTREGA.md` e `evidencia-fluxo.json` na pasta `docs` do GitHub. Abra o link em `ENTREGA.md` antes de enviá-lo ao professor.
 
@@ -102,7 +104,7 @@ export LOCATION="canadacentral"
 export LANGUAGE_LOCATION="canadacentral"
 
 # Repositório da atividade
-export REPOSITORY_URL="https://github.com/hqlcc/av-icl-02-azure"
+export REPOSITORY_URL="https://github.com/hqlcc/02-Azure-Cloud"
 
 bash scripts/provision.sh
 ```

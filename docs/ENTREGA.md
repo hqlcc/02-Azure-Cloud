@@ -2,7 +2,7 @@
 
 | Item | Link ou estado |
 | --- | --- |
-| Repositório público | [hqlcc/av-icl-02-azure](https://github.com/hqlcc/av-icl-02-azure) |
+| Repositório público | [hqlcc/02-Azure-Cloud](https://github.com/hqlcc/02-Azure-Cloud) |
 | Comandos executados para criar os recursos | [Registro de execução](COMANDOS_EXECUTADOS.md) |
 | Endereço da HTTP Function | [GET /api/sentimentos/totais](https://func-icl02-02a82191.azurewebsites.net/api/sentimentos/totais) |
 | Verificação pública em 05/11/2026 | Pendente. A tentativa de acesso expirou antes de receber uma resposta HTTP. |

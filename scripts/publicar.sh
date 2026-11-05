@@ -37,7 +37,7 @@ run 'az functionapp config appsettings set --name "$FUNCTION_APP" --resource-gro
 export TOTALS_URL="https://$BOOTSTRAP_HOST/api/sentimentos/totais"
 printf '\nTOTALS_URL=%q\n' "$TOTALS_URL" >> .deploy/resources.env
 {
-  printf '# Links para entrega\n\n- Repositório: %s\n' "${REPOSITORY_URL:-https://github.com/hqlcc/av-icl-02-azure}"
+  printf '# Links para entrega\n\n- Repositório: %s\n' "${REPOSITORY_URL:-https://github.com/hqlcc/02-Azure-Cloud}"
   printf -- '- Endpoint: %s\n\n' "$TOTALS_URL"
   printf 'Implantação realizada em: %s UTC.\n\n' "$(date -u +%FT%TZ)"
   printf 'Validação do fluxo: consultar docs/evidencia-fluxo.json após npm run smoke.\n'

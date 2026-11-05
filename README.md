@@ -2,7 +2,9 @@
 
 Aplicação serverless que coleta comentários, analisa o sentimento com Azure AI Language, grava cada resultado no Azure SQL Database por meio de uma fila e fornece os totais em JSON.
 
-Os 22 testes passaram. A Azure criou a infraestrutura em Canada Central. A publicação das funções e a confirmação dos totais pela rota HTTP continuam pendentes. Consulte os [links de entrega](docs/ENTREGA.md) e o [registro dos comandos executados](docs/COMANDOS_EXECUTADOS.md).
+**[Consultar os totais de sentimentos na Azure](https://func-icl02-02a82191.azurewebsites.net/api/sentimentos/totais)**
+
+Em 05/11/2026, a função respondeu HTTP 200 e o total passou de 6 para 8 registros em 17 segundos. Consulte a [evidência das duas leituras](docs/evidencia-fluxo.json) e os [comandos executados na Azure](docs/COMANDOS_EXECUTADOS.md).
 
 ## Atendimento ao enunciado
 
@@ -68,9 +70,9 @@ A fila é o recurso do Azure Storage; a Queue Function é sua consumidora. A cha
 - **Dependências:** o lockfile fixa as versões. Há overrides temporários de `@azure/identity` para 4.13.0 e de `uuid` para 11.1.1, corrigindo a árvore transitiva apontada por `npm audit` ([MSAL](https://github.com/advisories/GHSA-xcx6-jx8p-x3h5), [uuid](https://github.com/advisories/GHSA-w5hq-g745-h8pq)). Este projeto usa autenticação SQL; não usa os fluxos Entra ID dessa dependência. Revisar os overrides antes de adotar autenticação Entra ID.
 - **Rede:** para simplificar a avaliação, o SQL aceita conexões originadas na Azure com a regra `AllowAzureServices`, ainda exigindo autenticação. Essa regra abrange serviços Azure de outras assinaturas também. Um ambiente de produção deveria restringir a rede com VNet/private endpoints. A publicação tenta criar a tabela e o usuário pelo Cloud Shell. Se a conexão SQL direta falhar, usa o instalador na própria Function App. O pacote temporário aceita somente POST autenticado com a chave mestra. A senha do administrador é enviada por HTTPS à própria aplicação. O pacote definitivo substitui o instalador e contém apenas as três funções da atividade.
 
-## Concluir a implantação existente
+## Republicar no grupo de recursos existente
 
-Os arquivos já estão na raiz de [hqlcc/02-Azure-Cloud](https://github.com/hqlcc/02-Azure-Cloud). Para concluir a publicação no grupo já criado:
+Os arquivos já estão na raiz de [hqlcc/02-Azure-Cloud](https://github.com/hqlcc/02-Azure-Cloud). Para uma futura republicação no mesmo grupo, siga os passos abaixo.
 
 1. Abra o [Azure Cloud Shell em Bash](https://shell.azure.com/bash) na assinatura Azure for Students desta atividade.
 2. Cole esta linha no terminal. Ela baixa o projeto e inicia a publicação usando os recursos existentes.
@@ -161,11 +163,10 @@ Os testes locais usam respostas controladas nas integrações; não substituem a
 
 ## Entrega ao professor
 
-1. Publicar os arquivos no repositório Git e confirmar que o professor pode acessá-lo.
-2. Executar a implantação na assinatura escolhida.
-3. Executar o teste real e incluir `docs/COMANDOS_EXECUTADOS.md`, `docs/evidencia-fluxo.json` e `docs/ENTREGA.md` no commit final.
-4. Atualizar o estado no início deste README somente depois de confirmar o deploy.
-5. Enviar a URL do repositório e a URL HTTP gerada. Manter o endpoint e o timer ativos no período combinado para correção.
+- [Repositório Git](https://github.com/hqlcc/02-Azure-Cloud)
+- [Endpoint público com os totais](https://func-icl02-02a82191.azurewebsites.net/api/sentimentos/totais)
+- [Comandos executados para criar os recursos](docs/COMANDOS_EXECUTADOS.md)
+- [Evidência da verificação pública](docs/evidencia-fluxo.json)
 
 Consultar também [roteiro de demonstração](docs/DEMONSTRACAO.md) e [problemas comuns](docs/PROBLEMAS_COMUNS.md).
 

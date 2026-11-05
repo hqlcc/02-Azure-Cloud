@@ -1,0 +1,16 @@
+{
+  "checkedAt": "2026-11-05T04:38:56.049Z",
+  "url": "https://func-icl02-02a82191.azurewebsites.net/api/sentimentos/totais",
+  "before": {
+    "positive": 2,
+    "neutral": 1,
+    "negative": 3
+  },
+  "after": {
+    "positive": 4,
+    "neutral": 1,
+    "negative": 3
+  },
+  "elapsedSeconds": 17,
+  "result": "PASS"
+}

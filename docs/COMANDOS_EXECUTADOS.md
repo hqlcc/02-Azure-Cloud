@@ -239,4 +239,22 @@ Exit code: `0`.
 az functionapp show --name "$FUNCTION_APP" --resource-group "$RESOURCE_GROUP" --query properties.defaultHostName -o tsv
 ```
 
-O registro termina no comando acima, sem código de saída. A primeira tentativa de inicializar a tabela por conexão SQL direta retornou `ESOCKET`. A próxima etapa é publicar o instalador e as funções usando os recursos existentes.
+A tentativa inicial de preparar a tabela por conexão direta retornou `ESOCKET`. O Cloud Shell foi usado para retomar a publicação no grupo de recursos existente.
+
+## Retomada pelo Azure Cloud Shell
+
+Comando executado no terminal da assinatura:
+
+```bash
+git clone https://github.com/hqlcc/02-Azure-Cloud.git && cd 02-Azure-Cloud && bash scripts/retomar.sh
+```
+
+A CLI registrou HTTP 202 para o primeiro pacote enviado (implantação `dd1ac226-d75c-44d7-b708-f8f337484f37`). As primeiras tentativas de chamar o instalador receberam HTTP 503. As etapas de criação de recursos estão registradas acima. O script que faz a publicação e registra os comandos da sessão está em [scripts/publicar.sh](../scripts/publicar.sh).
+
+## Verificação externa em 05/11/2026
+
+```bash
+npm run smoke -- "https://func-icl02-02a82191.azurewebsites.net/api/sentimentos/totais"
+```
+
+Código de saída `0`. A soma das contagens subiu de 6 para 8 entre as consultas. [Respostas registradas pelo teste](evidencia-fluxo.json).

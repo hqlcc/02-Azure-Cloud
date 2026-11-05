@@ -5,6 +5,11 @@
 | Repositório público | [hqlcc/02-Azure-Cloud](https://github.com/hqlcc/02-Azure-Cloud) |
 | Comandos executados para criar os recursos | [Registro de execução](COMANDOS_EXECUTADOS.md) |
 | Endereço da HTTP Function | [GET /api/sentimentos/totais](https://func-icl02-02a82191.azurewebsites.net/api/sentimentos/totais) |
-| Verificação pública em 05/11/2026 | Pendente. A tentativa de acesso expirou antes de receber uma resposta HTTP. |
+| Verificação pública em 05/11/2026 | HTTP 200 nas duas leituras. [Evidência em JSON](evidencia-fluxo.json). |
 
-A Azure criou os recursos. Falta concluir a inicialização da tabela, publicar as funções e observar o aumento dos totais. Para concluir com o grupo existente, siga a seção “Concluir a implantação existente” no [README](../README.md). O teste de ponta a ponta gera `docs/evidencia-fluxo.json` com os totais antes e depois.
+| Leitura | positive | neutral | negative | Total |
+| --- | ---: | ---: | ---: | ---: |
+| Inicial | 2 | 1 | 3 | 6 |
+| Após 17 segundos | 4 | 1 | 3 | 8 |
+
+A rota consulta a tabela do Azure SQL a cada requisição. Os valores acima registram o teste concluído às 04:38:56 UTC.
